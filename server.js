@@ -1,5 +1,6 @@
 const express = require('express');
 const authRoutes = require('./routes/authRoutes.js');
+const productsRoutes = require('./routes/productsRoutes.js');
 require('dotenv').config();
 const app = express();
 
@@ -17,3 +18,4 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productsRoutes)
