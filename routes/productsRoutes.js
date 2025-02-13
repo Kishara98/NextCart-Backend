@@ -61,4 +61,26 @@ router.get('/:id', (req, res) => {
     res.status(500).json({message: 'Error while fetching product'})
   }
 })
+
+router.put('/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      message: 'Updated',
+    });
+  } catch (error) {
+    res.status(500).json({message: 'Error while updating product'})
+  }
+})
+
+router.delete('/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      message: 'Deleted',
+    });
+  } catch (error) {
+    res.status(500).json({message: 'Error while deleting product'})
+  }
+})
 module.exports = router;
