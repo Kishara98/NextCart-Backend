@@ -35,4 +35,30 @@ router.get('/', (req, res) => {
     res.status(500).json({ message: 'Error while fetching products' });
   }
 });
+
+
+router.get('/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const dummyProduct = {
+      id: '1234',
+      name: 'dummy products',
+      description: 'dummy description',
+      imageUrl: 'www.google.com',
+      unitPrice: 25,
+    };
+  if (dummyProduct.id == id) {
+    res.status(200).json({
+      product: [dummyProduct],
+      message: 'Product fetched',
+    });
+  } else {
+    res.status(200).json({
+      message: 'No product',
+    });
+  }
+  } catch (error) {
+    res.status(500).json({message: 'Error while fetching product'})
+  }
+})
 module.exports = router;
