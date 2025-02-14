@@ -1,64 +1,87 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const product = require("../models/products.js");
 
-router.post('/', (req, res) => {
+
+// add product
+router.post("/", async(req, res) => {
   try {
     const { name, description, imageUrl, unitPrice } = req.body;
-    console.log('Product details: ' + req.body);
+    console.log("Product details: " + req.body);
+    const result = await product.create({
+      name,
+      description,
+      imageUrl,
+      unitPrice,
+    });
     res.status(200).json({
-      details: {
-        name,
-        description,
-        imageUrl,
-        unitPrice,
-      },
-      message: 'Product insert successfully',
+      result,
+      message: "Product insert successfully",
     });
   } catch (error) {
-    res.status(500).json({ message: 'Product insert error' });
+    res.status(500).json({ message: "Product insert error" });
   }
 });
 
-router.get('/', (req, res) => {
+// get all products
+router.get("/", async(req, res) => {
   try {
-    const dummyProduct = {
-      name: 'dummy products',
-      description: 'dummy description',
-      imageUrl: 'www.google.com',
-      unitPrice: 25,
-    };
+    const result = await product.find({});
+
     res.status(200).json({
-      product: [dummyProduct],
-      message: 'All products fetched',
+      result,
+      message: "All products fetched",
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error while fetching products' });
+    res.status(500).json({ message: "Error while fetching products" });
   }
 });
 
-
-router.get('/:id', (req, res) => {
+// get a single product
+router.get("/:id", async(req, res) => {
   try {
     const { id } = req.params;
-    const dummyProduct = {
-      id: '1234',
-      name: 'dummy products',
-      description: 'dummy description',
-      imageUrl: 'www.google.com',
-      unitPrice: 25,
-    };
-  if (dummyProduct.id == id) {
-    res.status(200).json({
-      product: [dummyProduct],
-      message: 'Product fetched',
-    });
-  } else {
-    res.status(200).json({
-      message: 'No product',
-    });
-  }
+    
+    const result = await product.findById(id);
+
+      res.status(200).json({
+        product: result,
+        message: "Product fetched",
+      });
+    
   } catch (error) {
-    res.status(500).json({message: 'Error while fetching product'})
+    res.status(500).json({ message: "Error while fetching product" });
   }
-})
+});
+
+// update a product
+router.put("/:id", async(req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await product.findByIdAndUpdate(id, req.body);
+    console.log(result);
+    res.status(200).json({
+      oldValue: result,
+      newValue: req.body,
+      message: "Updated"
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error while updating product" });
+  }
+});
+
+// delete a product
+router.delete("/:id", async(req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await product.findByIdAndDelete(id);
+
+    res.status(200).json({
+      result,
+      message: "Deleted",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error while deleting product" });
+  }
+});
 module.exports = router;
