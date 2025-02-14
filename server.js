@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes.js');
 const productsRoutes = require('./routes/productsRoutes.js');
-const cardRoutes = require('./routes/cardRoutes.js');
+const cartRoutes = require('./routes/cartRoutes.js');
+
 require('dotenv').config();
 const app = express();
-const url = 'mongodb+srv://admin:admin@nextcartcluster.xmnha.mongodb.net/NextCardCollection?retryWrites=true&w=majority&appName=NextCartCluster';
+const url = 'mongodb+srv://admin:admin@nextcartcluster.xmnha.mongodb.net/NextCartCollection?retryWrites=true&w=majority&appName=NextCartCluster';
+
 app.use(express.json());
 const PORT = process.env.PORT;
 
@@ -26,4 +28,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productsRoutes)
-app.use('/api/cart', cardRoutes)
+app.use('/api/cart', cartRoutes)
