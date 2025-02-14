@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 router.post('/register', (req, res) => {
@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
     try {
       console.log(body);
       res.status(200).json({ 
-        message: "Registration success", 
+        message: 'Registration success', 
         account: body 
     });
     } catch (error) {
@@ -32,7 +32,7 @@ router.post('/login', (req, res) => {
     try {
         console.log(userName, email);
         res.status(200).json({ 
-          message: "Login success", 
+          message: 'Login success', 
           account: userName, email
         });
     } catch(error) {
