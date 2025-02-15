@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes.js');
 const productsRoutes = require('./routes/productsRoutes.js');
 const cartRoutes = require('./routes/cartRoutes.js');
+const authenticateJWT = require('./middleware/authenticateJWT.js')
 
 require('dotenv').config();
 const app = express();
@@ -27,5 +28,5 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productsRoutes)
-app.use('/api/cart', cartRoutes)
+app.use('/api/products', authenticateJWT, productsRoutes)
+app.use('/api/cart', authenticateJWT, cartRoutes)
