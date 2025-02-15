@@ -11,7 +11,6 @@ router.post('/register', async (req, res) => {
   try {
       const { userName, password, address, firstName, lastName, email } = req.body;
       
-      // Validate required fields
       if (!userName) throw new Error('UserName is required');
       if (!password) throw new Error('Password is required');
       if (!address) throw new Error('Address is required');
