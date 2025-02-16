@@ -7,6 +7,7 @@ const auth = require('../models/auth.js');
 const secretKey = process.env.JWT_SECRET;
 
 
+// user register
 router.post('/register', async (req, res) => {
   try {
       const { userName, password, address, firstName, lastName, email } = req.body;
@@ -41,6 +42,7 @@ router.post('/register', async (req, res) => {
 });
 
 
+// user login
 router.post('/login', async (req, res) => {
   try {
       const { userName, password } = req.body;
@@ -66,7 +68,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
+// user logout
 router.post('/logout', (req, res) => {
   try {
     res.status(200).json({message: 'Logout successful'});
