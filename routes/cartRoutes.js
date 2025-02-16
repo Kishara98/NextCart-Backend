@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cart = require('../models/carts.js');
 
+// add to cart
 router.post('/', async (req, res) => {
   try {
     const { name, quantity, unitPrice } = req.body;
@@ -15,6 +16,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// fetch from cart
 router.get('/', async (req, res) => {
   try {
     const result = await cart.find();
@@ -27,6 +29,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// update cart item
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -42,6 +45,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// delete cart item
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
