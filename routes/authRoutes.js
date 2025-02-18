@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const auth = require('../models/auth.js');
+
 const secretKey = process.env.JWT_SECRET;
 
 
@@ -76,4 +77,5 @@ router.post('/logout', (req, res) => {
     res.status(500).json({message: 'Logout unsuccess'})
   }
 })
+
 module.exports = router; 
