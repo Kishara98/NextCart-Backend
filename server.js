@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes.js');
 const productsRoutes = require('./routes/productsRoutes.js');
 const cartRoutes = require('./routes/cartRoutes.js');
+const ordersRoutes = require('./routes/ordersRoutes.js');
 const authenticateJWT = require('./middleware/authenticateJWT.js')
 
 require('dotenv').config();
@@ -30,3 +31,4 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', authenticateJWT, productsRoutes)
 app.use('/api/cart', authenticateJWT, cartRoutes)
+app.use('/ap/order', authenticateJWT, ordersRoutes);
