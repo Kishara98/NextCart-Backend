@@ -32,7 +32,6 @@ const authSchema = mongoose.Schema(
   }
 );
 
-
 const auth = mongoose.model('auth', authSchema);
 
 module.exports = auth;
